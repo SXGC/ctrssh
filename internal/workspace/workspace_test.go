@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func TestValidate(t *testing.T) {

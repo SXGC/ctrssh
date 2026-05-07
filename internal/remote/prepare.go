@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 // BuildPrepareScript returns a bash script that, when run inside the target

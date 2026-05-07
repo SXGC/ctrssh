@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/prepare"
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 const brokenCtr = "ctrssh-doctor-e2e"

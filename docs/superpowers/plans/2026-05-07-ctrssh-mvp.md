@@ -70,8 +70,8 @@ Each `internal/<x>` package has one job, communicates only via plain structs. No
 
 - [ ] **Step 1: Initialize Go module**
 
-Run: `cd /workspaces/dev_docker/ctrssh && go mod init github.com/cby/ctrssh`
-Expected: writes `go.mod` with `module github.com/cby/ctrssh` and current Go version.
+Run: `cd /workspaces/dev_docker/ctrssh && go mod init github.com/SXGC/ctrssh`
+Expected: writes `go.mod` with `module github.com/SXGC/ctrssh` and current Go version.
 
 - [ ] **Step 2: Add cobra dependency**
 
@@ -174,7 +174,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func TestValidate(t *testing.T) {
@@ -240,7 +240,7 @@ func TestValidate(t *testing.T) {
 - [ ] **Step 2: Run test, expect FAIL**
 
 Run: `go test ./internal/workspace/...`
-Expected: FAIL with `package github.com/cby/ctrssh/internal/workspace is not in std`.
+Expected: FAIL with `package github.com/SXGC/ctrssh/internal/workspace is not in std`.
 
 - [ ] **Step 3: Implement workspace**
 
@@ -322,8 +322,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func tempStore(t *testing.T) *config.Store {
@@ -436,7 +436,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"github.com/gofrs/flock"
 	"gopkg.in/yaml.v3"
 )
@@ -602,7 +602,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/config"
 )
 
 func TestEnsureKeypairGenerates(t *testing.T) {
@@ -750,7 +750,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/sshconfig"
+	"github.com/SXGC/ctrssh/internal/sshconfig"
 )
 
 func TestUpsertOnEmpty(t *testing.T) {
@@ -958,8 +958,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func TestBuildConnectArgsGolden(t *testing.T) {
@@ -1011,7 +1011,7 @@ Expected: package not found.
 ```go
 package remote
 
-import "github.com/cby/ctrssh/internal/workspace"
+import "github.com/SXGC/ctrssh/internal/workspace"
 
 // BuildConnectArgs returns argv for the ProxyCommand chain.
 // The chain pipes stdio through: local ssh → remote docker exec → container's sshd -i.
@@ -1068,7 +1068,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 // BuildPrepareScript returns a bash script that, when run inside the target
@@ -1150,8 +1150,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 var update = flag.Bool("update", false, "update golden files")
@@ -1231,7 +1231,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/remote"
 )
 
 func TestBuildDoctorChecksOrder(t *testing.T) {
@@ -1280,7 +1280,7 @@ Expected: undefined symbols.
 ```go
 package remote
 
-import "github.com/cby/ctrssh/internal/workspace"
+import "github.com/SXGC/ctrssh/internal/workspace"
 
 // DoctorCheck describes one diagnostic step.
 // Argv == nil means the check is performed in-process by the caller (e.g.,
@@ -1361,7 +1361,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/connect"
+	"github.com/SXGC/ctrssh/internal/connect"
 )
 
 // TestRunPassthrough exercises the stdio bridge using `cat` as the child:
@@ -1554,7 +1554,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/prepare"
 )
 
 // The runner sends a script to a command via stdin and validates the last
@@ -1619,8 +1619,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 // Run prepares the workspace by sending the prepare script to the appropriate
@@ -1714,7 +1714,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cby/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -1759,8 +1759,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"github.com/spf13/cobra"
 )
 
@@ -1829,7 +1829,7 @@ import (
 	"fmt"
 	"text/tabwriter"
 
-	"github.com/cby/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -1931,9 +1931,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/sshconfig"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/sshconfig"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"github.com/spf13/cobra"
 )
 
@@ -2112,9 +2112,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/connect"
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/connect"
+	"github.com/SXGC/ctrssh/internal/remote"
 	"github.com/spf13/cobra"
 )
 
@@ -2197,8 +2197,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/prepare"
 	"github.com/spf13/cobra"
 )
 
@@ -2276,8 +2276,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/remote"
 	"github.com/spf13/cobra"
 )
 
@@ -2401,11 +2401,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/connect"
-	"github.com/cby/ctrssh/internal/prepare"
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/connect"
+	"github.com/SXGC/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -2567,10 +2567,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/prepare"
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 const brokenCtr = "ctrssh-doctor-e2e"
@@ -2712,7 +2712,7 @@ No daemons, no exposed ports. The chain is pure stdio.
 ## Install
 
 ```bash
-go install github.com/cby/ctrssh/cmd/ctrssh@latest
+go install github.com/SXGC/ctrssh/cmd/ctrssh@latest
 ```
 
 ## Use

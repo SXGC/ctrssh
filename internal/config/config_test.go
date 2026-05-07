@@ -5,8 +5,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func tempStore(t *testing.T) *config.Store {

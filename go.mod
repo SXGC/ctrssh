@@ -1,4 +1,4 @@
-module github.com/cby/ctrssh
+module github.com/SXGC/ctrssh
 
 go 1.25.0
 

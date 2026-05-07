@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/sshconfig"
+	"github.com/SXGC/ctrssh/internal/sshconfig"
 )
 
 func TestUpsertOnEmpty(t *testing.T) {

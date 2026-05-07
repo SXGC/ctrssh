@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/connect"
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/connect"
+	"github.com/SXGC/ctrssh/internal/remote"
 	"github.com/spf13/cobra"
 )
 

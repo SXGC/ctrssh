@@ -7,9 +7,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/sshconfig"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/sshconfig"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"github.com/spf13/cobra"
 )
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/config"
 )
 
 func TestEnsureKeypairGenerates(t *testing.T) {

@@ -1,6 +1,6 @@
 package remote
 
-import "github.com/cby/ctrssh/internal/workspace"
+import "github.com/SXGC/ctrssh/internal/workspace"
 
 // BuildConnectArgs returns argv for the ProxyCommand chain.
 // The chain pipes stdio through: local ssh → remote docker exec → container's sshd -i.

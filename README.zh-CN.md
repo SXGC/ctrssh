@@ -24,7 +24,7 @@
 ## 安装
 
 ```bash
-go install github.com/cby/ctrssh/cmd/ctrssh@latest
+go install github.com/SXGC/ctrssh/cmd/ctrssh@latest
 ```
 
 ## 使用

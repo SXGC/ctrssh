@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/prepare"
+	"github.com/SXGC/ctrssh/internal/prepare"
 )
 
 // The runner sends a script to a command via stdin and validates the last

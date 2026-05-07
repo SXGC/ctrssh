@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 var update = flag.Bool("update", false, "update golden files")

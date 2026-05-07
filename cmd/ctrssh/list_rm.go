@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"text/tabwriter"
 
-	"github.com/cby/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/config"
 	"github.com/spf13/cobra"
 )
 

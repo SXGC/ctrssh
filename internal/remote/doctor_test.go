@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/remote"
 )
 
 func TestBuildDoctorChecksOrder(t *testing.T) {

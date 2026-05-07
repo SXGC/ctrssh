@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 func TestBuildConnectArgsGolden(t *testing.T) {

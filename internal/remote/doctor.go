@@ -1,6 +1,6 @@
 package remote
 
-import "github.com/cby/ctrssh/internal/workspace"
+import "github.com/SXGC/ctrssh/internal/workspace"
 
 // DoctorCheck describes one diagnostic step.
 // Argv == nil means the check is performed in-process by the caller (e.g.,

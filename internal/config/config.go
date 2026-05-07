@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/workspace"
 	"github.com/gofrs/flock"
 	"gopkg.in/yaml.v3"
 )

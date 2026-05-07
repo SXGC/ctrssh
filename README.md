@@ -24,7 +24,7 @@ No daemons, no exposed ports. The chain is pure stdio.
 ## Install
 
 ```bash
-go install github.com/cby/ctrssh/cmd/ctrssh@latest
+go install github.com/SXGC/ctrssh/cmd/ctrssh@latest
 ```
 
 ## Use

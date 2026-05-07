@@ -11,8 +11,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/cby/ctrssh/internal/remote"
-	"github.com/cby/ctrssh/internal/workspace"
+	"github.com/SXGC/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/workspace"
 )
 
 // Run prepares the workspace by sending the prepare script to the appropriate

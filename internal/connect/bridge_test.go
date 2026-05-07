@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cby/ctrssh/internal/connect"
+	"github.com/SXGC/ctrssh/internal/connect"
 )
 
 // TestRunPassthrough exercises the stdio bridge using `cat` as the child:

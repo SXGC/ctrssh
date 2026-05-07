@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/cby/ctrssh/internal/config"
-	"github.com/cby/ctrssh/internal/remote"
+	"github.com/SXGC/ctrssh/internal/config"
+	"github.com/SXGC/ctrssh/internal/remote"
 	"github.com/spf13/cobra"
 )
 
