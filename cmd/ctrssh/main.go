@@ -3,11 +3,20 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
+	"github.com/cby/ctrssh/internal/config"
 	"github.com/spf13/cobra"
 )
 
 var verbose bool
+
+func defaultConfigDir() string {
+	if d, err := os.UserConfigDir(); err == nil {
+		return filepath.Join(d, "ctrssh")
+	}
+	return filepath.Join(os.Getenv("HOME"), ".config", "ctrssh")
+}
 
 func newRootCmd() *cobra.Command {
 	root := &cobra.Command{
@@ -17,6 +26,9 @@ func newRootCmd() *cobra.Command {
 		SilenceErrors: true,
 	}
 	root.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+
+	store := config.NewStore(defaultConfigDir())
+	root.AddCommand(newAddCmd(store))
 	return root
 }
 
