@@ -7,12 +7,4 @@ StrictHostKeyChecking=no
 -o
 UserKnownHostsFile=/dev/null
 me@host.example.com
-docker
-exec
--i
--u
-root
-devbox
-sh
--c
-mkdir -p /run/sshd && exec /usr/sbin/sshd -i -e -f /etc/ssh/sshd_config_ctrssh
+docker exec -i -u root 'devbox' sh -c 'mkdir -p /run/sshd && exec /usr/sbin/sshd -i -e -f /etc/ssh/sshd_config_ctrssh'

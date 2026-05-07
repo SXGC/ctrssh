@@ -1,6 +1,10 @@
 package remote
 
-import "github.com/SXGC/ctrssh/internal/workspace"
+import (
+	"fmt"
+
+	"github.com/SXGC/ctrssh/internal/workspace"
+)
 
 // DoctorCheck describes one diagnostic step.
 // Argv == nil means the check is performed in-process by the caller (e.g.,
@@ -21,6 +25,22 @@ func BuildDoctorChecks(ws workspace.Workspace) []DoctorCheck {
 		out = append(out, ws.SSHHost)
 		return append(out, extra...)
 	}
+
+	// Step 5 needs a shell so it can run mkdir && sshd -t. When we go through
+	// ssh, the remote shell would re-parse our argv and split on &&, so the
+	// whole inner command must be packaged as a single shell-quoted string.
+	step5InnerSh := "mkdir -p /run/sshd && /usr/sbin/sshd -t -f /etc/ssh/sshd_config_ctrssh"
+	var step5Argv []string
+	if ws.SSHHost == "" {
+		step5Argv = []string{"docker", "exec", ws.Container, "sh", "-c", step5InnerSh}
+	} else {
+		remoteCmd := fmt.Sprintf("docker exec %s sh -c %s",
+			shellSingleQuote(ws.Container),
+			shellSingleQuote(step5InnerSh),
+		)
+		step5Argv = append([]string{"ssh"}, append(sshOpts, ws.SSHHost, remoteCmd)...)
+	}
+
 	return []DoctorCheck{
 		{Label: "local ssh client present"},
 		{
@@ -39,7 +59,7 @@ func BuildDoctorChecks(ws workspace.Workspace) []DoctorCheck {
 			// /run/sshd is on tmpfs and disappears on container restart;
 			// recreate it so the config test mirrors how connect runs sshd.
 			Label: "container: sshd -t passes",
-			Argv:  prefix("docker", "exec", ws.Container, "sh", "-c", "mkdir -p /run/sshd && /usr/sbin/sshd -t -f /etc/ssh/sshd_config_ctrssh"),
+			Argv:  step5Argv,
 		},
 		{
 			Label: "container: authorized_keys readable",
