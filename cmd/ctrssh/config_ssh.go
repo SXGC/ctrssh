@@ -82,7 +82,7 @@ func renderHostBlock(w workspace.Workspace, execPath, identityPath string) strin
 	b.WriteString("  ForwardAgent yes\n")
 	b.WriteString("  StrictHostKeyChecking no\n")
 	b.WriteString("  UserKnownHostsFile /dev/null\n")
-	fmt.Fprintf(&b, "  IdentityFile %s\n", identityPath)
+	fmt.Fprintf(&b, "  IdentityFile %q\n", identityPath)
 	b.WriteString("  IdentitiesOnly yes\n")
 	fmt.Fprintf(&b, "  User %s\n", w.RemoteUser)
 	fmt.Fprintf(&b, "  ProxyCommand %q connect --stdio %s\n", execPath, w.Name)
