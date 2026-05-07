@@ -53,6 +53,27 @@ if [ -z "$HOMEDIR" ]; then
   exit 1
 fi
 
+# Many devcontainer base images create the remote user with no password
+# (shadow entry is "user:!:..." or "user::..."). With UsePAM=no, sshd checks
+# /etc/shadow directly and refuses such accounts even for pubkey auth, with
+# "User X not allowed because account is locked". Stamp an unrecoverable
+# random hash so sshd's locked-check passes; PasswordAuthentication=no in
+# our sshd_config still prevents any actual password login.
+if [ -f /etc/shadow ]; then
+  PWFIELD="$(awk -F: -v u="$REMOTE_USER" '$1==u{print $2}' /etc/shadow || true)"
+  case "$PWFIELD" in
+    ''|'!'*|'*'*)
+      RAND_PW="$(head -c 24 /dev/urandom | base64 | tr -d '\n')"
+      if command -v chpasswd >/dev/null 2>&1; then
+        printf '%%s:%%s\n' "$REMOTE_USER" "$RAND_PW" | chpasswd 2>/dev/null || true
+      elif command -v openssl >/dev/null 2>&1 && command -v usermod >/dev/null 2>&1; then
+        HASH="$(openssl passwd -6 "$RAND_PW" 2>/dev/null || true)"
+        [ -n "$HASH" ] && usermod -p "$HASH" "$REMOTE_USER" 2>/dev/null || true
+      fi
+      ;;
+  esac
+fi
+
 mkdir -p "$HOMEDIR/.ssh"
 chmod 700 "$HOMEDIR/.ssh"
 touch "$HOMEDIR/.ssh/authorized_keys"
