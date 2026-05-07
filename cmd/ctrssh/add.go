@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"github.com/cby/ctrssh/internal/config"
 	"github.com/cby/ctrssh/internal/workspace"
@@ -25,6 +27,26 @@ func newAddCmd(store *config.Store) *cobra.Command {
 				return err
 			}
 			fmt.Printf("registered workspace %q\n", ws.Name)
+			// Auto-refresh ssh config so users don't have to remember the second step.
+			list, err := store.Load()
+			if err != nil {
+				return err
+			}
+			privPath, _, err := store.EnsureKeypair()
+			if err != nil {
+				return err
+			}
+			exec, err := os.Executable()
+			if err != nil {
+				return err
+			}
+			abs, err := filepath.Abs(exec)
+			if err != nil {
+				return err
+			}
+			if err := rewriteSSHConfig(defaultSSHConfigPath(), list, abs, privPath); err != nil {
+				fmt.Fprintf(cmd.ErrOrStderr(), "warning: ssh config refresh failed: %v\n", err)
+			}
 			return nil
 		},
 	}
