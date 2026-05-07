@@ -21,3 +21,14 @@ func TestRenderHostBlockQuotesPaths(t *testing.T) {
 		t.Errorf("ProxyCommand not quoted. block:\n%s", got)
 	}
 }
+
+// Inner SSH compression cuts bytes-on-wire for the local-client ↔ container-sshd
+// session. Critical on upload-bound links where the docker-exec stdio path is
+// not the real bottleneck.
+func TestRenderHostBlockEnablesCompression(t *testing.T) {
+	ws := workspace.Workspace{Name: "work", SSHHost: "me@host", Container: "ctr", RemoteUser: "vscode"}
+	got := renderHostBlock(ws, "/usr/local/bin/ctrssh", "/home/u/.config/ctrssh/id_ctrssh")
+	if !strings.Contains(got, "Compression yes") {
+		t.Errorf("expected `Compression yes` in host block, got:\n%s", got)
+	}
+}

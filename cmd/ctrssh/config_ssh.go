@@ -84,6 +84,10 @@ func renderHostBlock(w workspace.Workspace, execPath, identityPath string) strin
 	b.WriteString("  UserKnownHostsFile /dev/null\n")
 	fmt.Fprintf(&b, "  IdentityFile %q\n", identityPath)
 	b.WriteString("  IdentitiesOnly yes\n")
+	// Compress the inner SSH stream before it enters the docker-exec stdio
+	// pipe — on upload-bound links this is the dominant win for code/text
+	// payloads. Negligible CPU on AES-NI hardware.
+	b.WriteString("  Compression yes\n")
 	fmt.Fprintf(&b, "  User %s\n", w.RemoteUser)
 	fmt.Fprintf(&b, "  ProxyCommand %q connect --stdio %s\n", execPath, w.Name)
 	return b.String()
