@@ -33,6 +33,7 @@ func newRootCmd() *cobra.Command {
 	root.AddCommand(newRmCmd(store))
 	root.AddCommand(newConfigSSHCmd(store))
 	root.AddCommand(newConnectCmd(store))
+	root.AddCommand(newPrepareCmd(store))
 	return root
 }
 
