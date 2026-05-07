@@ -1,5 +1,7 @@
 # ctrssh
 
+[中文](README.zh-CN.md)
+
 Expose a remote container running on an SSH-reachable host as a regular SSH endpoint, so you can `ssh work.dev` (or open in VSCode Remote-SSH / JetBrains Gateway / Cursor) without exposing any TCP port from the container.
 
 ## How it works
@@ -65,7 +67,3 @@ code --remote ssh-remote+work.dev /workspaces
   id_ctrssh, id_ctrssh.pub # tool-specific keypair
 ~/.ssh/config              # ctrssh writes Host blocks delimited by markers
 ```
-
-## Design
-
-See `docs/superpowers/specs/2026-05-07-ctrssh-mvp-design.md`.
