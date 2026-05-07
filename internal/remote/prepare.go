@@ -65,7 +65,15 @@ chown -R "$REMOTE_USER":"$(id -gn "$REMOTE_USER")" "$HOMEDIR/.ssh"
 cat >/etc/ssh/sshd_config_ctrssh <<'CFG'
 PubkeyAuthentication yes
 PasswordAuthentication no
-UsePAM no
+# UsePAM=yes lets PAM's account chain decide whether to accept the user.
+# This matters because many container base images create the remote user
+# with no password (shadow entry "user:!:..."), which sshd's own check
+# treats as locked and refuses pubkey logins for. PAM's pam_unix is
+# lenient about "!" entries when authenticating via pubkey. On builds
+# without PAM (e.g. default Alpine openssh-server) this directive is a
+# no-op and sshd's own check applies — that path still works for users
+# whose shadow entry is empty (the typical Alpine root state).
+UsePAM yes
 HostKey /etc/ssh/ssh_host_ed25519_key
 Subsystem sftp internal-sftp
 PermitRootLogin prohibit-password
