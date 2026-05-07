@@ -29,6 +29,8 @@ func newRootCmd() *cobra.Command {
 
 	store := config.NewStore(defaultConfigDir())
 	root.AddCommand(newAddCmd(store))
+	root.AddCommand(newListCmd(store))
+	root.AddCommand(newRmCmd(store))
 	return root
 }
 
