@@ -1,0 +1,10 @@
+# binaries
+/ctrssh
+/dist/
+
+# IDE
+/.idea/
+/.vscode/
+
+# Go
+/coverage.out
