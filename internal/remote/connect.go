@@ -7,9 +7,11 @@ import "github.com/SXGC/ctrssh/internal/workspace"
 // When ws.SSHHost is empty (test-only short-circuit), the outer ssh hop is omitted
 // and docker runs locally.
 func BuildConnectArgs(ws workspace.Workspace, identityPath string) []string {
+	// /run is tmpfs in most containers, so /run/sshd disappears on restart
+	// and sshd refuses to start. Re-create it on every connect.
 	dockerArgs := []string{
 		"docker", "exec", "-i", "-u", "root", ws.Container,
-		"/usr/sbin/sshd", "-i", "-e", "-f", "/etc/ssh/sshd_config_ctrssh",
+		"sh", "-c", "mkdir -p /run/sshd && exec /usr/sbin/sshd -i -e -f /etc/ssh/sshd_config_ctrssh",
 	}
 	if ws.SSHHost == "" {
 		return dockerArgs

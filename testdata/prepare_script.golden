@@ -24,6 +24,12 @@ if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
   ssh-keygen -A >/dev/null
 fi
 
+# /run is tmpfs in most containers; sshd refuses to run without its
+# privilege separation directory, so ensure it exists before every
+# sshd invocation (prepare validates config, connect runs sshd -i).
+mkdir -p /run/sshd
+chmod 0755 /run/sshd
+
 HOMEDIR="$(getent passwd "$REMOTE_USER" | cut -d: -f6)"
 if [ -z "$HOMEDIR" ]; then
   echo "user $REMOTE_USER does not exist in container" >&2

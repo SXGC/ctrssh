@@ -36,8 +36,10 @@ func BuildDoctorChecks(ws workspace.Workspace) []DoctorCheck {
 			Argv:  prefix("docker", "exec", ws.Container, "test", "-x", "/usr/sbin/sshd"),
 		},
 		{
+			// /run/sshd is on tmpfs and disappears on container restart;
+			// recreate it so the config test mirrors how connect runs sshd.
 			Label: "container: sshd -t passes",
-			Argv:  prefix("docker", "exec", ws.Container, "/usr/sbin/sshd", "-t", "-f", "/etc/ssh/sshd_config_ctrssh"),
+			Argv:  prefix("docker", "exec", ws.Container, "sh", "-c", "mkdir -p /run/sshd && /usr/sbin/sshd -t -f /etc/ssh/sshd_config_ctrssh"),
 		},
 		{
 			Label: "container: authorized_keys readable",

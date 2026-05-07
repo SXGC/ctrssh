@@ -13,8 +13,6 @@ exec
 -u
 root
 devbox
-/usr/sbin/sshd
--i
--e
--f
-/etc/ssh/sshd_config_ctrssh
+sh
+-c
+mkdir -p /run/sshd && exec /usr/sbin/sshd -i -e -f /etc/ssh/sshd_config_ctrssh
