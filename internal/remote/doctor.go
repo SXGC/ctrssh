@@ -31,10 +31,13 @@ func BuildDoctorChecks(ws workspace.Workspace) []DoctorCheck {
 	// whole inner command must be packaged as a single shell-quoted string.
 	step5InnerSh := "mkdir -p /run/sshd && /usr/sbin/sshd -t -f /etc/ssh/sshd_config_ctrssh"
 	var step5Argv []string
+	// Run as root to mirror connect's docker-exec invocation; otherwise sshd
+	// can't read /etc/ssh/ssh_host_*_key (mode 0600, root-owned) and reports
+	// "Unable to load host key" even when connect would succeed.
 	if ws.SSHHost == "" {
-		step5Argv = []string{"docker", "exec", ws.Container, "sh", "-c", step5InnerSh}
+		step5Argv = []string{"docker", "exec", "-u", "root", ws.Container, "sh", "-c", step5InnerSh}
 	} else {
-		remoteCmd := fmt.Sprintf("docker exec %s sh -c %s",
+		remoteCmd := fmt.Sprintf("docker exec -u root %s sh -c %s",
 			shellSingleQuote(ws.Container),
 			shellSingleQuote(step5InnerSh),
 		)
