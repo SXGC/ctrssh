@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"os/exec"
 	"os/signal"
 	"syscall"
@@ -46,6 +47,12 @@ func Run(ctx context.Context, argv []string, stdin io.Reader, stdout, stderr io.
 			return err
 		}
 	}
+}
+
+// RunFiles is Run but with *os.File stdio so exec.Cmd can dup the FDs directly
+// rather than spawning copy goroutines. Used by e2e tests piping into ssh.NewClientConn.
+func RunFiles(ctx context.Context, argv []string, stdin, stdout *os.File, stderr io.Writer) error {
+	return Run(ctx, argv, stdin, stdout, stderr)
 }
 
 // AsExitError reports whether err is an *exec.ExitError and returns it.
