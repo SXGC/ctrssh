@@ -86,7 +86,7 @@ func TestPrepareThenConnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	go func() {
-		_ = connect.RunFiles(ctx, remote.BuildConnectArgs(ws, priv), inR, outW, os.Stderr)
+		_ = connect.RunFiles(ctx, remote.BuildConnectArgs(ws, priv, ""), inR, outW, os.Stderr)
 		_ = outW.Close()
 		_ = inR.Close()
 	}()

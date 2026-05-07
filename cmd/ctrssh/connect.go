@@ -30,7 +30,11 @@ func newConnectCmd(store *config.Store) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			argv := remote.BuildConnectArgs(ws, privPath)
+			controlDir, err := store.EnsureControlDir()
+			if err != nil {
+				return err
+			}
+			argv := remote.BuildConnectArgs(ws, privPath, controlDir)
 			ctx := context.Background()
 			err = connect.Run(ctx, argv, os.Stdin, os.Stdout, os.Stderr)
 			if ee, ok := connect.AsExitError(err); ok {

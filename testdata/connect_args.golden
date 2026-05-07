@@ -6,5 +6,11 @@ ssh
 StrictHostKeyChecking=no
 -o
 UserKnownHostsFile=/dev/null
+-o
+ControlMaster=auto
+-o
+ControlPath=/home/u/.config/ctrssh/cm/cm-%C
+-o
+ControlPersist=600
 me@host.example.com
 docker exec -i -u root 'devbox' sh -c 'mkdir -p /run/sshd && exec /usr/sbin/sshd -i -e -f /etc/ssh/sshd_config_ctrssh'
